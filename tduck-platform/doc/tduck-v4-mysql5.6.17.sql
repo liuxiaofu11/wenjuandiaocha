@@ -72,7 +72,7 @@ CREATE TABLE `ac_user_token`
     `id`          bigint unsigned NOT NULL AUTO_INCREMENT,
     `type`        int                                                           NOT NULL DEFAULT '0' COMMENT '类型',
     `user_id`     bigint                                                        NOT NULL COMMENT '用户Id',
-    `token`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'token',
+    `token`       varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'token',
     `expire_time` datetime                                                      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',
     `create_time` datetime                                                      NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `update_time` datetime                                                      NOT NULL DEFAULT CURRENT_TIMESTAMP,
