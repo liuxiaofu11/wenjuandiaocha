@@ -46,6 +46,9 @@ public class FormDataUtils {
      * 所有表单都包含的字段
      */
     public static void addFormBaseDataField(List<FormFieldVO> fields) {
+        fields.add(new FormFieldVO(UserFormDataEntity.Fields.name, "提交者名称", FIELD_USER_TYPE));
+        fields.add(new FormFieldVO(UserFormDataEntity.Fields.phoneNumber, "提交者手机号", FIELD_USER_TYPE));
+        fields.add(new FormFieldVO(UserFormDataEntity.Fields.projectName, "提交者项目地", FIELD_USER_TYPE));
         fields.add(new FormFieldVO(UserFormDataEntity.Fields.serialNumber, "提交序号", UserFormDataEntity.Fields.serialNumber));
         fields.add(new FormFieldVO(UserFormDataEntity.Fields.extValue, "扩展字段", FormItemTypeEnum.INPUT.toString()));
         fields.add(new FormFieldVO(SysBaseEntity.Fields.updateBy, "修改用户", FIELD_USER_TYPE));

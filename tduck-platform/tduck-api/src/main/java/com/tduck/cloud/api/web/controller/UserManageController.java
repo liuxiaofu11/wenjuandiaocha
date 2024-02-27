@@ -1,8 +1,11 @@
 package com.tduck.cloud.api.web.controller;
+
 import java.util.List;
 
 import cn.hutool.core.util.ObjUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tduck.cloud.account.constant.AccountConstants;
@@ -41,6 +44,13 @@ public class UserManageController {
     @GetMapping("/page")
     public Result queryPage(Page page, UserEntity user) {
         QueryWrapper<UserEntity> simpleQuery = QueryWrapperUtils.toSimpleQuery(user);
+
+        if (StringUtils.isNotBlank(user.getRealName())) {
+            simpleQuery.like("real_name", "%" + user.getRealName() + "%");
+        }
+        if (StringUtils.isNotBlank(user.getProjectName())) {
+            simpleQuery.like("project_name", "%" + user.getProjectName() + "%");
+        }
         simpleQuery.orderByDesc("create_time");
         return Result.success(userService.page(page, simpleQuery));
     }

@@ -72,6 +72,21 @@ public class UserEntity extends BaseEntity<UserEntity> {
      */
     private Integer passwordType;
 
+    /**
+     * 用户名称
+     */
+    private String realName;
+
+    /**
+     * 项目地ID
+     */
+    private Long projectId;
+
+    /**
+     * 项目地 名称
+     */
+    private String projectName;
+
 
     public Boolean isAdmin() {
         return SecurityUtils.isAdmin(this.id);

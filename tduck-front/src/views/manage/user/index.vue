@@ -15,6 +15,17 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="姓名" prop="email">
+        <el-input v-model="queryParams.realName" placeholder="请输入姓名" clearable @keyup.enter.native="handleQuery" />
+      </el-form-item>
+      <el-form-item label="项目地名" prop="email">
+        <el-input
+          v-model="queryParams.projectName"
+          placeholder="请输入项目地名称"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery"> 搜索 </el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"> 重置 </el-button>
@@ -40,6 +51,8 @@
     <el-table style="margin-top: 10px" v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="Id" align="center" prop="id" />
+      <el-table-column label="项目地" align="center" prop="projectName" />
+      <el-table-column label="姓名" align="center" prop="realName" />
       <el-table-column label="昵称" align="center" prop="name" />
       <el-table-column label="性别" align="center" prop="gender">
         <template slot-scope="scope">
@@ -75,6 +88,9 @@
     <!-- 添加或修改用户对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="姓名" prop="realName">
+          <el-input v-model="form.realName" placeholder="请输入姓名" />
+        </el-form-item>
         <el-form-item label="昵称" prop="name">
           <el-input v-model="form.name" placeholder="请输入昵称" />
         </el-form-item>
@@ -144,6 +160,7 @@ export default {
       form: {},
       // 表单校验
       rules: {
+        realName: [{ required: true, message: '姓名不能为空', trigger: 'blur' }],
         name: [{ required: true, message: '昵称不能为空', trigger: 'blur' }],
         gender: [
           {

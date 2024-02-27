@@ -95,6 +95,28 @@ public class UserFormDataEntity extends SysBaseEntity {
      */
     private String extValue;
 
+    /**
+     * 提交者用户名
+     */
+    private String name;
+
+    /**
+     * 用户手机号
+     */
+    private String phoneNumber;
+
+
+    /**
+     * 项目地ID
+     */
+    private Long projectId;
+
+    /**
+     * 项目地 名称
+     */
+    private String projectName;
+
+
 
 
 }
