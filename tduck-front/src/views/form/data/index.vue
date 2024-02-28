@@ -474,7 +474,11 @@ export default {
         submitUa: null,
         wxUserInfo: null,
         wxOpenId: '',
-        originalData: data.formModel
+        originalData: data.formModel,
+        name: '',
+        phoneNumber: '',
+        projectId: null,
+        projectName: ''
       }).then(() => {
         setTimeout(() => {
           this.$refs.baseTable.getXGrid().commitProxy('reload')

@@ -14,6 +14,7 @@
       </el-card>
     </div>
     <div v-if="writeStatus == 1" class="form-container">
+      <!-- 这个就是大阿达啊那个表单页面组件 -->
       <biz-project-form v-if="formConfig.formKey" ref="bizProjectForm" :form-config="formConfig" @submit="submitForm" />
     </div>
     <div v-cloak v-if="writeStatus == 2" class="title-icon-view">
@@ -84,7 +85,11 @@ export default {
         submitUa: ua,
         wxUserInfo: null,
         wxOpenId: null,
-        originalData: null
+        originalData: null,
+        name: null,
+        phoneNumber: null,
+        projectId: null,
+        projectName: null
       },
       // 提交后返回的数据
       submitResult: {
@@ -225,8 +230,15 @@ export default {
       this.submitFormData.formKey = this.formKey
       this.submitFormData.formId = data.formId
       this.submitFormData.formType = this.$refs.bizProjectForm.formConf.formType
+      this.submitFormData.name = data.name || ''
+      this.submitFormData.phoneNumber = data.phoneNumber || ''
+      this.submitFormData.projectId = data.projectId || ''
+      this.submitFormData.projectName = data.projectName || ''
+      // data.projectName  这个没复制，你上面也没定义，取出来是undfin 你可以用 || 这个符号 就是或者的意思，前面娶不到，就去后面这个，一般都给''空字符串
       let res = null
       if (this.writeType === 1) {
+        // 这个是提交接口
+        console.log(this.submitFormData, 'this.submitFormData------------------')
         res = await publicCreateFormResultRequest(this.submitFormData)
       } else {
         res = await createFormResultRequest(this.submitFormData)

@@ -196,7 +196,7 @@ export default {
     },
     handleUpdate() {
       let formModel = jsonSimpleClone(this.$refs.generateForm.formModel)
-      // 表单中字段名规则为字段类型时间戳 移除不符合规则的数据 不然会有其他的比如提交时间等数据
+      // 表单中字段名规则为字段类型时间戳 移除不符合规则的数据 不然会有其他的比如时间等数据
       let tempFormModel = {}
       // 保留formModel中包含数字的属性
       for (let key in formModel) {
@@ -214,7 +214,11 @@ export default {
         submitUa: null,
         wxUserInfo: null,
         wxOpenId: '',
-        originalData: tempFormModel
+        originalData: tempFormModel,
+        name: '',
+        phoneNumber: '',
+        projectId: null,
+        projectName: ''
       }).then((res) => {
         this.msgSuccess('修改成功')
         this.dialogVisible = false
