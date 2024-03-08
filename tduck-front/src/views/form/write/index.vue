@@ -101,6 +101,7 @@ export default {
     }
   },
   async created() {
+    this.initializeComponent()
     this.formKey = this.$route.query.key || this.$route.params.key
     // cookie获取微信用户信息
     this.getCookieAuthorizationUserInfo()
@@ -127,6 +128,16 @@ export default {
     viewFormResultRequest(this.formKey).then(() => {})
   },
   methods: {
+    initializeComponent() {
+      const urlParams = new URLSearchParams(window.location.search)
+      this.username = urlParams.get('username')
+      // this.username = '测试字段接参数';
+      this.phoneNumber = urlParams.get('phoneNumber')
+      this.projectName = urlParams.get('projectName')
+      this.projectId = urlParams.get('projectId')
+      // 将这些参数保存到组件的data中，以便后续使用
+    },
+
     queryProjectSettingStatus() {
       // 是否能进入填写
       getWriteSettingStatusRequest({
@@ -230,10 +241,10 @@ export default {
       this.submitFormData.formKey = this.formKey
       this.submitFormData.formId = data.formId
       this.submitFormData.formType = this.$refs.bizProjectForm.formConf.formType
-      this.submitFormData.name = data.name || ''
-      this.submitFormData.phoneNumber = data.phoneNumber || ''
-      this.submitFormData.projectId = data.projectId || ''
-      this.submitFormData.projectName = data.projectName || ''
+      this.submitFormData.name = this.username || ''
+      this.submitFormData.phoneNumber = this.phoneNumber || ''
+      this.submitFormData.projectId = this.projectId || ''
+      this.submitFormData.projectName = this.projectName || ''
       // data.projectName  这个没复制，你上面也没定义，取出来是undfin 你可以用 || 这个符号 就是或者的意思，前面娶不到，就去后面这个，一般都给''空字符串
       let res = null
       if (this.writeType === 1) {
