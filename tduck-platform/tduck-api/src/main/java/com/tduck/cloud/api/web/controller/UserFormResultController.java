@@ -156,8 +156,8 @@ public class UserFormResultController {
 
         String hashMap = CacheProject.getHashMap(String.valueOf(entity.getProjectId()));
         entity.setProjectName(hashMap);
-
         ValidatorUtils.validateEntity(entity);
+        log.info("公开信息填写info {}",entity.toString());
         entity.setSubmitRequestIp(HttpUtils.getIpAddr(request));
         Result<Boolean> userFormSettingStatus = userFormSettingService.getUserFormWriteSettingStatus(entity.getFormKey(), entity.getSubmitRequestIp(), entity.getWxOpenId(), CommonConstants.ConstantNumber.ONE);
         if (StrUtil.isNotBlank(userFormSettingStatus.getMsg())) {

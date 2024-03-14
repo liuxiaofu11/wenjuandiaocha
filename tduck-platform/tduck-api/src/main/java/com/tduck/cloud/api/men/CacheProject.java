@@ -41,7 +41,7 @@ public class CacheProject {
     // 提供一个公共的静态方法来获取hashMap
     public static String getHashMap(String code) {
         String value = "" ;
-        if (StringUtils.isBlank(code)) {
+        if (StringUtils.isNotBlank(code)) {
             value=   hashMap.get(code);
         }
         return value;
