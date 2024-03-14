@@ -5,11 +5,14 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import com.tduck.cloud.api.men.CacheProject;
 import com.tduck.cloud.api.util.HttpUtils;
 import com.tduck.cloud.common.constant.CommonConstants;
 import com.tduck.cloud.common.email.MailService;
 import com.tduck.cloud.common.util.CacheUtils;
+import com.tduck.cloud.common.util.JsonUtils;
 import com.tduck.cloud.common.util.Result;
 import com.tduck.cloud.common.util.SecurityUtils;
 import com.tduck.cloud.common.validator.ValidatorUtils;
@@ -157,7 +160,8 @@ public class UserFormResultController {
         String hashMap = CacheProject.getHashMap(String.valueOf(entity.getProjectId()));
         entity.setProjectName(hashMap);
         ValidatorUtils.validateEntity(entity);
-        log.info("公开信息填写info {}",entity.toString());
+        log.info("公开信息填写info {}", JSON.toJSON(entity));
+//        log.debug("公开信息填写info {}",entity.toString());
         entity.setSubmitRequestIp(HttpUtils.getIpAddr(request));
         Result<Boolean> userFormSettingStatus = userFormSettingService.getUserFormWriteSettingStatus(entity.getFormKey(), entity.getSubmitRequestIp(), entity.getWxOpenId(), CommonConstants.ConstantNumber.ONE);
         if (StrUtil.isNotBlank(userFormSettingStatus.getMsg())) {
