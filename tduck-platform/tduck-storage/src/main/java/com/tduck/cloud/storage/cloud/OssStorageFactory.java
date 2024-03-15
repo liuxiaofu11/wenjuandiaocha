@@ -53,11 +53,13 @@ public final class OssStorageFactory {
                 }
                 if (StrUtil.isBlank(config.getDomain())) {
                     String domain = ServletUtils.getDomain(ServletUtils.getRequest());
+                    domain.replace("8888","8999");
                     config.setDomain(domain + "/u");
                 }
+                config.setDomain(config.getDomain().replace("8888", "8999"));
                 storageService = new LocalStorageService(config);
             }
-            log.info("更新存储配置完成:{}", JsonUtils.objToJson(config));
+            log.info("更新存储配置完成111111:{}", JsonUtils.objToJson(config));
         } catch (Exception exception) {
             log.error("更新存储配置失败:{}", exception.getMessage());
         }
